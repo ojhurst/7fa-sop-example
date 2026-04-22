@@ -1,0 +1,81 @@
+/* ---- Task-list polish (for any SOP using checkboxes) ---------------- */
+
+.sl-markdown-content ul.contains-task-list {
+	list-style: none;
+	padding-left: 0.5rem;
+}
+
+.sl-markdown-content li.task-list-item {
+	margin-block: 0.55rem;
+	padding-left: 0.25rem;
+	line-height: 1.55;
+}
+
+.sl-markdown-content li.task-list-item input[type='checkbox'] {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 1.15rem;
+	height: 1.15rem;
+	margin-right: 0.6rem;
+	margin-left: -0.25rem;
+	vertical-align: -0.2rem;
+	border: 1.5px solid var(--sl-color-gray-4);
+	border-radius: 4px;
+	background: var(--sl-color-black);
+	cursor: pointer;
+	transition: all 0.15s ease;
+	flex-shrink: 0;
+}
+
+.sl-markdown-content li.task-list-item input[type='checkbox']:hover {
+	border-color: var(--sl-color-accent);
+}
+
+.sl-markdown-content li.task-list-item input[type='checkbox']:checked {
+	background: var(--sl-color-accent);
+	border-color: var(--sl-color-accent);
+}
+
+.sl-markdown-content li.task-list-item input[type='checkbox']:checked::after {
+	content: '✓';
+	display: block;
+	color: var(--sl-color-white);
+	font-size: 0.9rem;
+	font-weight: 700;
+	line-height: 1.05;
+	text-align: center;
+}
+
+.sl-markdown-content li.task-list-item:has(input[type='checkbox']:checked) {
+	opacity: 0.55;
+}
+
+.sl-markdown-content li.task-list-item code {
+	font-size: 0.78em;
+	padding: 0.1em 0.55em;
+	border-radius: 999px;
+	background: var(--sl-color-gray-6);
+	color: var(--sl-color-gray-2);
+	border: 1px solid var(--sl-color-gray-5);
+	white-space: nowrap;
+}
+
+.sl-markdown-content li.task-list-item em {
+	color: var(--sl-color-gray-3);
+	font-size: 0.85em;
+	font-style: normal;
+}
+
+.sl-markdown-content details {
+	margin-block: 1rem;
+	padding: 0.75rem 1rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 6px;
+	background: var(--sl-color-gray-7, var(--sl-color-black));
+}
+
+.sl-markdown-content details summary {
+	cursor: pointer;
+	font-weight: 600;
+	color: var(--sl-color-gray-2);
+}

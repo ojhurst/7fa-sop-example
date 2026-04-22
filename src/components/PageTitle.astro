@@ -1,0 +1,51 @@
+---
+const PAGE_TITLE_ID = '_top';
+
+const route = Astro.locals.starlightRoute;
+const id = route.entry.id;
+const slug = id.replace(/\.(md|mdx)$/i, '');
+const parts = slug.split('/');
+
+const sectionMap: Record<string, string> = {
+  'paid-acquisition': 'Paid Acquisition',
+  'organic': 'Organic Acquisition',
+  'sales-onboarding': 'Sales and Onboarding',
+  'operations': 'Operations',
+  'measurement': 'Measurement',
+  'creative-strategy': 'Creative and Strategy',
+};
+
+let section: string | null = null;
+if (parts.length > 1) {
+  const raw = parts[0];
+  section = sectionMap[raw] || raw.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
+---
+
+<div class="tms-page-title">
+  {section && <p class="tms-section-crumb">{section}</p>}
+  <h1 id={PAGE_TITLE_ID}>{route.entry.data.title}</h1>
+</div>
+
+<style>
+  @layer starlight.core {
+    h1 {
+      margin-top: 0;
+      font-size: var(--sl-text-h1);
+      line-height: var(--sl-line-height-headings);
+      font-weight: 600;
+      color: var(--sl-color-white);
+    }
+  }
+  .tms-page-title {
+    margin-top: 1rem;
+  }
+  .tms-section-crumb {
+    margin: 0 0 0.25rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #4a6cf7;
+  }
+</style>

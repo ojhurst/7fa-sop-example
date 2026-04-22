@@ -1,0 +1,60 @@
+---
+import Default from '@astrojs/starlight/components/SiteTitle.astro';
+import { execSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { resolve, dirname } from 'node:path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const repoRoot = resolve(__dirname, '../..');
+
+let buildNum = '';
+let buildSummary = '';
+
+try {
+  buildNum = readFileSync(resolve(repoRoot, 'build.txt'), 'utf-8').trim();
+} catch {
+  buildNum = '';
+}
+
+try {
+  const subject = execSync('git log -1 --format=%s', { cwd: repoRoot }).toString().trim();
+  const match = subject.match(/^Build\s+\d+\s*[:\-]\s*(.+)$/i);
+  buildSummary = match ? match[1] : subject;
+} catch {
+  /* not in a git checkout */
+}
+---
+
+<div class="tms-site-title-wrap">
+  <Default {...Astro.props} />
+  {buildNum && (
+    <div class="tms-title-build">
+      <span class="n">Build {buildNum}</span>
+      {buildSummary && <span class="s">— {buildSummary}</span>}
+    </div>
+  )}
+</div>
+
+<style>
+  .tms-site-title-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .tms-title-build {
+    font-size: 10px;
+    line-height: 1.3;
+    color: var(--sl-color-gray-3);
+    margin-top: 2px;
+  }
+  .tms-title-build .n {
+    font-weight: 600;
+    color: #4a6cf7;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .tms-title-build .s {
+    margin-left: 4px;
+  }
+</style>

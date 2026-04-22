@@ -1,0 +1,67 @@
+---
+import Default from '@astrojs/starlight/components/Footer.astro';
+import { execSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { resolve, dirname } from 'node:path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const repoRoot = resolve(__dirname, '../..');
+
+let buildNum = '';
+let buildSummary = '';
+let buildSha = '';
+
+try {
+  buildNum = readFileSync(resolve(repoRoot, 'build.txt'), 'utf-8').trim();
+} catch {
+  buildNum = '';
+}
+
+try {
+  const subject = execSync('git log -1 --format=%s', { cwd: repoRoot }).toString().trim();
+  const match = subject.match(/^Build\s+\d+\s*[:\-]\s*(.+)$/i);
+  buildSummary = match ? match[1] : subject;
+  buildSha = execSync('git rev-parse --short HEAD', { cwd: repoRoot }).toString().trim();
+} catch {
+  /* not in a git checkout */
+}
+---
+
+<Default><slot /></Default>
+
+{buildNum && (
+  <div class="tms-build-tag" data-build={buildNum} data-sha={buildSha}>
+    <span class="tms-build-num">Build {buildNum}</span>
+    {buildSummary && <span class="tms-build-summary">— {buildSummary}</span>}
+    {buildSha && <span class="tms-build-sha">({buildSha})</span>}
+  </div>
+)}
+
+<style>
+  .tms-build-tag {
+    display: block;
+    padding: 14px 16px;
+    margin-top: 24px;
+    font-size: 11px;
+    color: var(--sl-color-gray-3);
+    text-align: center;
+    border-top: 1px solid var(--sl-color-gray-5);
+    line-height: 1.5;
+  }
+  .tms-build-num {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #4a6cf7;
+  }
+  .tms-build-summary {
+    margin-left: 6px;
+    color: var(--sl-color-gray-2);
+  }
+  .tms-build-sha {
+    margin-left: 6px;
+    font-family: var(--sl-font-system-mono, ui-monospace, monospace);
+    color: var(--sl-color-gray-4);
+  }
+</style>
