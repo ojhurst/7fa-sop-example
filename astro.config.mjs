@@ -22,6 +22,7 @@ export default defineConfig({
 			],
 			sidebar: [
 				{ label: 'Home', slug: 'index' },
+				{ label: 'Command Center', link: '/command-center' },
 				{
 					label: 'Paid Acquisition',
 					items: [
