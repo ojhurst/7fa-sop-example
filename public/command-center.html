@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[YOUR AGENCY] — Command Center</title>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  7-FIGURE AGENCY COMMAND CENTER                              ║
+  ║  Built for Josh Nelson's 7-Figure Agency program members     ║
+  ║                                                              ║
+  ║  HOW TO CUSTOMIZE:                                           ║
+  ║  1. Find every [PLACEHOLDER] and replace with your info      ║
+  ║  2. Delete sections that don't apply to your business        ║
+  ║  3. Update all YOUR_WIKI_URL links to your deployed wiki     ║
+  ║  4. Host on Cloudflare Pages (free) — git push auto-deploys  ║
+  ║                                                              ║
+  ║  DESIGN: Dark theme, card-based, mobile responsive           ║
+  ║  STACK: Pure HTML/CSS — no dependencies, no build step       ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; }
+.header { padding: 20px 24px; border-bottom: 1px solid #1e293b; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.header h1 { font-size: 1.6rem; color: #f8fafc; }
+.header p { color: #64748b; font-size: 0.85rem; margin-top: 4px; }
+.header-wiki { display: flex; align-items: center; gap: 10px; }
+.wiki-link { display: inline-block; padding: 8px 16px; background: #2563eb; border: 1px solid #3b82f6; border-radius: 8px; color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.15s; }
+.wiki-link:hover { background: #1d4ed8; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; padding: 20px 24px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; overflow: hidden; }
+.card-header { padding: 14px 18px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+.card-title { font-weight: 700; font-size: 1rem; }
+.badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; font-weight: 600; }
+.badge-green { background: #166534; color: #4ade80; }
+.badge-yellow { background: #713f12; color: #facc15; }
+.badge-red { background: #7f1d1d; color: #fca5a5; }
+.badge-blue { background: #1e3a5f; color: #93c5fd; }
+.badge-purple { background: #4c1d95; color: #c4b5fd; }
+.badge-orange { background: #7c2d12; color: #fdba74; }
+.card-body { padding: 14px 18px; }
+.card-body ul { list-style: none; }
+.card-body li { padding: 6px 0; border-bottom: 1px solid #1a2332; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.card-body li:last-child { border-bottom: none; }
+.label { color: #94a3b8; display: flex; align-items: center; gap: 4px; flex: 1; }
+.value { color: #e2e8f0; font-weight: 500; text-align: right; white-space: nowrap; }
+.links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 14px 18px; }
+.link-btn { display: block; padding: 10px 14px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #e2e8f0; text-decoration: none; font-size: 0.85rem; text-align: center; transition: all 0.15s; }
+.link-btn:hover { background: #253347; border-color: #475569; }
+.link-btn.primary { background: #2563eb; border-color: #3b82f6; }
+.full-width { grid-column: 1 / -1; }
+.two-thirds { grid-column: span 2; }
+.dept { margin-bottom: 14px; }
+.dept:last-child { margin-bottom: 0; }
+.dept-title { font-size: 0.78rem; color: #38bdf8; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.dept-items { font-size: 0.84rem; color: #94a3b8; line-height: 1.8; }
+.dept-items a { color: #93c5fd; text-decoration: none; }
+.dept-items a:hover { color: #bfdbfe; text-decoration: underline; }
+.status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-green { background: #4ade80; }
+.dot-yellow { background: #facc15; }
+.dot-red { background: #f87171; }
+.dot-blue { background: #38bdf8; }
+.dot-orange { background: #fb923c; }
+.dot-purple { background: #c084fc; }
+.sop-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; padding: 14px 18px; }
+.sop-cat { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 10px 12px; }
+.sop-cat-title { font-size: 0.75rem; color: #38bdf8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+.sop-cat ul { list-style: none; }
+.sop-cat li { font-size: 0.78rem; padding: 2px 0; }
+.sop-cat a { color: #93c5fd; text-decoration: none; }
+.sop-cat a:hover { color: #bfdbfe; }
+.timeline-row { display: flex; gap: 12px; padding: 7px 0; border-bottom: 1px solid #1a2332; align-items: flex-start; font-size: 0.84rem; }
+.timeline-row:last-child { border-bottom: none; }
+.timeline-when { color: #38bdf8; font-weight: 600; white-space: nowrap; min-width: 130px; }
+.timeline-what { color: #94a3b8; flex: 1; }
+.timeline-status { white-space: nowrap; font-size: 0.75rem; padding: 2px 8px; border-radius: 6px; font-weight: 600; }
+.status-now { background: #7f1d1d; color: #fca5a5; }
+.status-soon { background: #713f12; color: #facc15; }
+.status-later { background: #1e3a5f; color: #93c5fd; }
+.status-goal { background: #14532d; color: #86efac; }
+.divider { padding: 6px 24px; }
+.divider-label { font-size: 0.75rem; color: #475569; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; border-top: 1px solid #1e293b; padding-top: 6px; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .links { grid-template-columns: 1fr; } .two-thirds { grid-column: span 1; } .sop-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════
+     STICKY NAV BAR
+     Add / remove links to match your own pages.
+     host these alongside this file on Cloudflare Pages.
+     ══════════════════════════════════════════════════════ -->
+<div style="background:#0a1628;border-bottom:1px solid #1e293b;padding:7px 16px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:0.78rem;font-family:system-ui,sans-serif;position:sticky;top:0;z-index:999;">
+  <span style="color:#475569;font-weight:700;margin-right:4px;">[AGENCY]-HQ</span>
+  <a href="/command-center.html" style="color:#93c5fd;text-decoration:none;padding:3px 9px;border-radius:5px;background:#1e293b;white-space:nowrap;">🏠 Command Center</a>
+  <a href="/content-strategy.html" style="color:#93c5fd;text-decoration:none;padding:3px 9px;border-radius:5px;background:#1e293b;white-space:nowrap;">📊 Content Strategy</a>
+  <a href="/client-tracker.html" style="color:#93c5fd;text-decoration:none;padding:3px 9px;border-radius:5px;background:#1e293b;white-space:nowrap;">👥 Client Tracker</a>
+  <a href="/connections.html" style="color:#93c5fd;text-decoration:none;padding:3px 9px;border-radius:5px;background:#1e293b;white-space:nowrap;">🔌 Connections</a>
+  <!-- Add more local .html pages here as you build them -->
+  <a href="https://YOUR_WIKI_URL" style="color:#4ade80;text-decoration:none;padding:3px 9px;border-radius:5px;background:#1e293b;white-space:nowrap;" target="_blank">📖 SOP Wiki</a>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     HEADER
+     ══════════════════════════════════════════════════════ -->
+<div class="header">
+  <div>
+    <h1>[YOUR AGENCY] — Command Center</h1>
+    <p>[YOUR NAME] — [YOUR NICHE] Marketing Agency — [MONTH YEAR]</p>
+  </div>
+  <div class="header-wiki">
+    <a href="https://YOUR_WIKI_URL" class="wiki-link" target="_blank">📖 SOP Wiki</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION: BUSINESSES / ENTITIES
+     List every business or project you operate.
+     Status dots: green=active, yellow=building, orange=pre-launch, red=paused
+     ══════════════════════════════════════════════════════ -->
+<div class="divider"><div class="divider-label">Businesses & Entities</div></div>
+<div class="grid">
+
+  <!-- All Businesses Overview -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">All Entities</span>
+      <span class="badge badge-blue">[X] ENTITIES</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="label"><span class="status-dot dot-green"></span>[YOUR AGENCY NAME]</span><span class="value">Marketing Agency · [NICHE]</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>[YOUR SERVICE BUSINESS]</span><span class="value">Active · [Your niche] services</span></li>
+        <!-- This is your unfair advantage — you OWN a business in the niche you serve -->
+        <li><span class="label"><span class="status-dot dot-yellow"></span>[SIDE BUSINESS / BRAND 2]</span><span class="value">Building</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>[PASSIVE INCOME ASSET]</span><span class="value">Passive Income</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>[PARKED BUSINESS]</span><span class="value">🚫 PARKED</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Your Service Business (The Unfair Advantage)
+       This is your proof-of-concept — the niche business you actually operate.
+       It becomes Case Study #1 for your agency. Document everything from Day 1. -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">[YOUR SERVICE BUSINESS]</span>
+      <span class="badge badge-orange">PRE-LAUNCH / ACTIVE</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="label"><span class="status-dot dot-green"></span>Website</span><span class="value">Live on Cloudflare Pages</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>GA4</span><span class="value">YOUR_GA4_ID installed</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>GSC</span><span class="value">Verified</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>[CERTIFICATION 1]</span><span class="value">In Progress</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>[CERTIFICATION 2]</span><span class="value">In Progress</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>Insurance / Full Launch</span><span class="value">[TARGET DATE]</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>Stats Tracking Sheet</span><span class="value">Create now — document from Day 1</span></li>
+      </ul>
+    </div>
+    <div class="links">
+      <a href="https://YOUR_WIKI_URL/[niche-business]/service-call-sop/" class="link-btn" target="_blank">Service Call SOP</a>
+      <a href="https://YOUR_WIKI_URL/[niche-business]/cold-outreach/" class="link-btn" target="_blank">Cold Outreach</a>
+      <a href="https://YOUR_WIKI_URL/[niche-business]/stats-tracking/" class="link-btn" target="_blank">Stats Tracking</a>
+      <a href="https://YOUR_WIKI_URL/[niche-business]/pricing/" class="link-btn" target="_blank">Pricing & Offers</a>
+    </div>
+  </div>
+
+  <!-- The Agency -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">[YOUR AGENCY NAME]</span>
+      <span class="badge badge-yellow">PRE-REVENUE / ACTIVE</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="label"><span class="status-dot dot-green"></span>Website</span><span class="value">Live on Cloudflare Pages</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>Analytics</span><span class="value">GA4 + Clarity installed</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>[KEY CREDENTIAL]</span><span class="value">In Progress</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>First GBP audit outreach</span><span class="value">Start [DATE]</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>First founding client</span><span class="value">Target [DATE]</span></li>
+        <li><span class="label"><span class="status-dot dot-blue"></span>10-client milestone</span><span class="value">[TARGET DATE]</span></li>
+        <li><span class="label"><span class="status-dot dot-blue"></span>Podcast launched</span><span class="value">[TARGET DATE]</span></li>
+      </ul>
+    </div>
+    <div class="links">
+      <a href="https://YOUR_WIKI_URL/agency/podcast-strategy/" class="link-btn" target="_blank">Podcast Strategy</a>
+      <a href="https://YOUR_WIKI_URL/agency/lead-magnet/" class="link-btn" target="_blank">Lead Magnet</a>
+      <a href="https://YOUR_WIKI_URL/agency/packages/" class="link-btn" target="_blank">Agency Packages</a>
+      <a href="https://YOUR_WIKI_URL/agency/launch-timeline/" class="link-btn" target="_blank">Full Timeline</a>
+    </div>
+  </div>
+
+  <!-- Team -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Team</span>
+      <span class="badge badge-purple">[X] + AI</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="label"><span class="status-dot dot-green"></span>[YOUR NAME] (Owner)</span><span class="value">Strategy / Filming / Decisions</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>[TEAM MEMBER 1]</span><span class="value">SEO + Video Editor</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>[TEAM MEMBER 2]</span><span class="value">SEO & Admin</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>[TEAM MEMBER 3]</span><span class="value">Account Management</span></li>
+        <li><span class="label"><span class="status-dot dot-blue"></span>Claude (AI)</span><span class="value">CEO Assistant / 2nd Brain</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Agency Packages Quick Reference -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Agency Packages</span>
+      <span class="badge badge-green">ACTIVE</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="label">Starter</span><span class="value">$[X]/mo — Foundation tier</span></li>
+        <li><span class="label">Growth</span><span class="value">$[X]/mo — Scaling tier</span></li>
+        <li><span class="label">Dominate</span><span class="value">$[X]/mo — Full-stack tier</span></li>
+        <li><span class="label">Off-Menu (last resort)</span><span class="value">$[X]/mo — Sales call only</span></li>
+        <li><span class="label">Setup fee (one-time)</span><span class="value">$[X] — All tiers</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>Contract type</span><span class="value">Month-to-month · No lock-in</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>Max new clients/month</span><span class="value">[X] — legitimate scarcity</span></li>
+      </ul>
+    </div>
+    <div class="links">
+      <a href="https://YOUR_WIKI_URL/agency/packages/" class="link-btn" target="_blank">Full Package Details</a>
+      <a href="https://YOUR_WIKI_URL/sales/discovery-call/" class="link-btn" target="_blank">Discovery Call SOP</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION: SOCIAL MEDIA
+     Track every platform for every business.
+     Dot key: ✅ exists · 🔴 reconnect to GHL · 🆕 needs creation · ⚠️ check · 🚫 parked
+     ══════════════════════════════════════════════════════ -->
+<div class="divider"><div class="divider-label">Social Media</div></div>
+<div class="grid">
+
+  <div class="card full-width">
+    <div class="card-header">
+      <span class="card-title">Account Status — All Businesses</span>
+      <span class="badge badge-red">REVIEW NEEDED</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li style="font-size:0.78rem;color:#64748b;border-bottom:1px solid #1a2332;padding-bottom:8px;margin-bottom:4px;">
+          <span style="color:#4ade80;font-weight:700;">✅ Exists</span>&nbsp;&nbsp;
+          <span style="color:#fbbf24;font-weight:700;">🔴 Reconnect to GHL</span>&nbsp;&nbsp;
+          <span style="color:#f87171;font-weight:700;">🆕 Needs creation</span>&nbsp;&nbsp;
+          <span style="color:#94a3b8;font-weight:700;">⚠️ Check</span>&nbsp;&nbsp;
+          <span style="color:#64748b;font-weight:700;">🚫 Parked</span>
+        </li>
+        <!-- Priority businesses — your agency + your niche service business -->
+        <li style="background:#1a2e1a;padding:4px 8px;border-radius:4px;margin-bottom:2px;">
+          <span class="label" style="font-weight:700;color:#4ade80;">🎯 [YOUR AGENCY NAME]</span>
+          <span class="value" style="font-size:0.8rem;">Portfolio 🆕 · FB 🆕 · IG 🆕 · LinkedIn 🆕 · YouTube 🆕 · Ad Acct 🆕</span>
+        </li>
+        <li style="background:#1a2e1a;padding:4px 8px;border-radius:4px;margin-bottom:2px;">
+          <span class="label" style="font-weight:700;color:#4ade80;">🎯 [YOUR SERVICE BUSINESS]</span>
+          <span class="value" style="font-size:0.8rem;">Portfolio 🆕 · FB 🆕 · IG 🆕 · GBP ⏳ · Ad Acct 🆕</span>
+        </li>
+        <!-- Secondary businesses -->
+        <li><span class="label" style="color:#94a3b8;">[BRAND 2]</span><span class="value" style="font-size:0.8rem;">FB ✅🔴 · IG ✅🔴 · TikTok ⚠️</span></li>
+        <li><span class="label" style="color:#475569;">🚫 [PARKED BRAND]</span><span class="value" style="font-size:0.8rem;color:#475569;">PARKED — skip</span></li>
+      </ul>
+      <div style="margin-top:10px;padding:8px 10px;background:#1a1f2e;border-radius:6px;font-size:0.78rem;color:#94a3b8;">
+        <strong style="color:#4ade80;">[TEAM MEMBER] handles account setup</strong> · <strong style="color:#fbbf24;">Owner only:</strong> add billing to ad accounts — keep ad accounts separate per business (critical for client trust)
+      </div>
+    </div>
+    <div class="links">
+      <a href="https://YOUR_WIKI_URL/marketing/meta-business-setup/" class="link-btn primary" target="_blank">📣 Meta Business Suite SOP</a>
+      <a href="https://YOUR_WIKI_URL/tools/social-media-setup/" class="link-btn" target="_blank">📱 Account Status Map</a>
+      <a href="https://YOUR_WIKI_URL/marketing/social-media-cadence/" class="link-btn" target="_blank">Posting Cadence</a>
+      <a href="https://app.gohighlevel.com" class="link-btn" target="_blank">GHL Social Planner</a>
+      <a href="https://business.facebook.com" class="link-btn" target="_blank">Meta Business Suite</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION: PRIORITIES & TIMELINE
+     Keep this ruthlessly current. These are the only things that matter today.
+     ══════════════════════════════════════════════════════ -->
+<div class="divider"><div class="divider-label">Priorities & Timeline</div></div>
+<div class="grid">
+
+  <!-- Top Priorities -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Top Priorities — [CURRENT QUARTER]</span>
+      <span class="badge badge-red">ACTION NEEDED</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <!-- 🔴 RED = do today / this week / hard deadline -->
+        <li><span class="label"><span class="status-dot dot-red"></span>🚨 [COMPLIANCE ITEM — taxes, licenses, permits]</span><span class="value">Owner · ASAP</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>[KEY DEADLINE 1]</span><span class="value">Owner · Due [DATE]</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>[KEY DEADLINE 2]</span><span class="value">Owner · Due [DATE]</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>Book [CERTIFICATION] exam</span><span class="value">Owner · [DATE]</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>File [AGENCY] LLC</span><span class="value">Before 1st client</span></li>
+        <li><span class="label"><span class="status-dot dot-red"></span>Film first [X] content videos</span><span class="value">Owner</span></li>
+        <!-- 🟡 YELLOW = this month -->
+        <li><span class="label"><span class="status-dot dot-yellow"></span>Meta BM — add billing to ad accounts</span><span class="value">Owner</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>Password manager — set up team org</span><span class="value">Owner · Bitwarden or 1Password</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>Get video backlog into ClickUp</span><span class="value">Owner + VA</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>GHL — verify all automation triggers</span><span class="value">VA</span></li>
+        <!-- 🔵 BLUE = this quarter -->
+        <li><span class="label"><span class="status-dot dot-blue"></span>GHL YouTube lead funnel</span><span class="value">This quarter</span></li>
+        <li><span class="label"><span class="status-dot dot-blue"></span>First podcast episode recorded</span><span class="value">This quarter</span></li>
+        <li><span class="label"><span class="status-dot dot-blue"></span>Get general liability insurance quotes</span><span class="value">This quarter</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Agency Launch Timeline -->
+  <div class="card two-thirds">
+    <div class="card-header">
+      <span class="card-title">[YOUR AGENCY] — Launch Roadmap</span>
+      <span class="badge badge-orange">[START DATE] → [12-MONTH GOAL]</span>
+    </div>
+    <div class="card-body">
+      <!-- TIMELINE TEMPLATE
+           The 7FA model: 12 months to 10 clients, 24 months to 7-figure runway.
+           Adjust dates and milestones to your actual plan. -->
+      <div class="timeline-row">
+        <span class="timeline-when">Month 1–2</span>
+        <span class="timeline-what">Get certified · Tag / serve your own [niche] business · Build prospect list of 30 · Send first 5 audit Looms · Landing page live</span>
+        <span class="timeline-status status-now">NOW</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-when">Month 3–4</span>
+        <span class="timeline-what">First [X] founding clients at Starter price · Podcast recorded and launched · First case study published (your own business as #1)</span>
+        <span class="timeline-status status-soon">SOON</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-when">Month 5–6</span>
+        <span class="timeline-what">Referral program active · First Google Ads campaign for a client · [Industry event / trade show] attendance · 6–8 clients</span>
+        <span class="timeline-status status-soon">SOON</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-when">Month 7–9</span>
+        <span class="timeline-what">Full site launch with case studies + booking calendar · First Growth-tier client · Hire first part-time fulfillment help</span>
+        <span class="timeline-status status-later">LATER</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-when">Month 10–12</span>
+        <span class="timeline-what">WIN CONDITION: 10 clients · $[X] MRR · Case study library · Podcast at [X] episodes · Systems running without daily oversight</span>
+        <span class="timeline-status status-goal">GOAL</span>
+      </div>
+      <div class="timeline-row">
+        <span class="timeline-when">36-Month Target</span>
+        <span class="timeline-what">30–40 clients · $[X]K+ MRR · $[X]M+ ARR · Team handles fulfillment · Owner on strategy only</span>
+        <span class="timeline-status status-later">LATER</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION: SOP WIKI
+     This maps your full SOP wiki at a glance.
+     Update every href to match your actual wiki slugs.
+     ══════════════════════════════════════════════════════ -->
+<div class="divider"><div class="divider-label">SOP Wiki — <a href="https://YOUR_WIKI_URL" style="color:#38bdf8;text-decoration:none;" target="_blank">YOUR_WIKI_URL</a></div></div>
+<div class="grid">
+
+  <div class="card full-width">
+    <div class="card-header">
+      <span class="card-title">All SOP Sections</span>
+      <span class="badge badge-green">LIVE · AUTO-DEPLOY</span>
+    </div>
+    <div class="sop-grid">
+
+      <!-- OPERATIONS — CEO-level rhythms -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Operations</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/operations/weekly-ceo-review/" target="_blank">Weekly CEO Review</a></li>
+          <li><a href="https://YOUR_WIKI_URL/operations/annual-planning/" target="_blank">Annual Planning</a></li>
+          <li><a href="https://YOUR_WIKI_URL/operations/password-management/" target="_blank">🔑 Passwords (Bitwarden)</a></li>
+          <li><a href="https://YOUR_WIKI_URL/operations/after-every-team-call/" target="_blank">After Every Team Call</a></li>
+          <li><a href="https://YOUR_WIKI_URL/operations/client-onboarding/" target="_blank">Client Onboarding</a></li>
+        </ul>
+      </div>
+
+      <!-- SALES — Discovery → proposal → close -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Sales</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/sales/discovery-call/" target="_blank">Discovery Call</a></li>
+          <li><a href="https://YOUR_WIKI_URL/sales/proposal-template/" target="_blank">Proposal Template</a></li>
+          <li><a href="https://YOUR_WIKI_URL/sales/objection-handling/" target="_blank">Objection Handling</a></li>
+          <li><a href="https://YOUR_WIKI_URL/sales/follow-up-sequence/" target="_blank">Follow-Up Sequence</a></li>
+        </ul>
+      </div>
+
+      <!-- ONBOARDING — First 30 days for new clients -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Onboarding</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/onboarding/day-one-kickoff/" target="_blank">Day-One Kickoff Call</a></li>
+          <li><a href="https://YOUR_WIKI_URL/onboarding/access-checklist/" target="_blank">Access Checklist</a></li>
+          <li><a href="https://YOUR_WIKI_URL/onboarding/baseline-audit/" target="_blank">Baseline Audit</a></li>
+          <li><a href="https://YOUR_WIKI_URL/onboarding/30-day-plan/" target="_blank">30-Day Plan</a></li>
+        </ul>
+      </div>
+
+      <!-- PAID ACQUISITION — PPC, LSA, Meta Ads -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Paid Acquisition</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/paid/google-ads-setup/" target="_blank">Google Ads Setup</a></li>
+          <li><a href="https://YOUR_WIKI_URL/paid/lsa-setup/" target="_blank">Local Service Ads</a></li>
+          <li><a href="https://YOUR_WIKI_URL/paid/meta-ads-setup/" target="_blank">Meta Ads Setup</a></li>
+          <li><a href="https://YOUR_WIKI_URL/paid/monthly-ppc-review/" target="_blank">Monthly PPC Review</a></li>
+        </ul>
+      </div>
+
+      <!-- ORGANIC / SEO -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Organic & SEO</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/organic/local-seo-gbp/" target="_blank">Google Business Profile</a></li>
+          <li><a href="https://YOUR_WIKI_URL/organic/article-production/" target="_blank">Article Production</a></li>
+          <li><a href="https://YOUR_WIKI_URL/organic/on-page-checklist/" target="_blank">On-Page Checklist</a></li>
+          <li><a href="https://YOUR_WIKI_URL/organic/review-generation/" target="_blank">Review Generation</a></li>
+          <li><a href="https://YOUR_WIKI_URL/organic/link-building/" target="_blank">Link Building</a></li>
+        </ul>
+      </div>
+
+      <!-- MEASUREMENT — Reporting, KPIs, dashboards -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Measurement</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/measurement/weekly-client-report/" target="_blank">Weekly Client Report</a></li>
+          <li><a href="https://YOUR_WIKI_URL/measurement/monthly-dashboard/" target="_blank">Monthly Dashboard</a></li>
+          <li><a href="https://YOUR_WIKI_URL/measurement/qbr-template/" target="_blank">Quarterly Business Review</a></li>
+          <li><a href="https://YOUR_WIKI_URL/measurement/ga4-setup/" target="_blank">GA4 Setup</a></li>
+          <li><a href="https://YOUR_WIKI_URL/measurement/call-tracking/" target="_blank">Call Tracking</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTENT / CREATIVE -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Content & Creative</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/content/video-pipeline/" target="_blank">Video Pipeline</a></li>
+          <li><a href="https://YOUR_WIKI_URL/content/filming-day-prep/" target="_blank">Filming Day Prep</a></li>
+          <li><a href="https://YOUR_WIKI_URL/content/editing-handoff/" target="_blank">Editing Handoff</a></li>
+          <li><a href="https://YOUR_WIKI_URL/content/thumbnail-creation/" target="_blank">Thumbnail Creation</a></li>
+          <li><a href="https://YOUR_WIKI_URL/content/upload-checklist/" target="_blank">Upload Checklist</a></li>
+          <li><a href="https://YOUR_WIKI_URL/content/podcast-sop/" target="_blank">Podcast SOP</a></li>
+        </ul>
+      </div>
+
+      <!-- MARKETING (AGENCY) — Outreach, authority, lead gen -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Agency Marketing</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/agency/podcast-strategy/" target="_blank">Podcast Strategy</a></li>
+          <li><a href="https://YOUR_WIKI_URL/agency/lead-magnet/" target="_blank">Lead Magnet PDF</a></li>
+          <li><a href="https://YOUR_WIKI_URL/agency/cold-outreach-looms/" target="_blank">GBP Audit Looms</a></li>
+          <li><a href="https://YOUR_WIKI_URL/agency/email-newsletter/" target="_blank">Email Newsletter</a></li>
+          <li><a href="https://YOUR_WIKI_URL/agency/social-cadence/" target="_blank">Social Media Cadence</a></li>
+          <li><a href="https://YOUR_WIKI_URL/marketing/meta-business-setup/" target="_blank">📣 Meta Business Suite</a></li>
+        </ul>
+      </div>
+
+      <!-- NICHE SERVICE BUSINESS — Your Case Study #1 -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">[Niche Service Business]</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/[niche-business]/service-call-sop/" target="_blank">Service Call SOP</a></li>
+          <li><a href="https://YOUR_WIKI_URL/[niche-business]/cold-outreach/" target="_blank">Cold Outreach</a></li>
+          <li><a href="https://YOUR_WIKI_URL/[niche-business]/ghl-pipeline/" target="_blank">GHL Pipeline</a></li>
+          <li><a href="https://YOUR_WIKI_URL/[niche-business]/stats-tracking/" target="_blank">Stats Tracking</a></li>
+          <li><a href="https://YOUR_WIKI_URL/[niche-business]/certifications/" target="_blank">Certifications</a></li>
+          <li><a href="https://YOUR_WIKI_URL/[niche-business]/competitor-benchmark/" target="_blank">Competitor Benchmark</a></li>
+        </ul>
+      </div>
+
+      <!-- TEAM & DELEGATION -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Team & Delegation</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/team/clickup-setup/" target="_blank">ClickUp Setup</a></li>
+          <li><a href="https://YOUR_WIKI_URL/team/weekly-one-on-ones/" target="_blank">Weekly 1:1s</a></li>
+          <li><a href="https://YOUR_WIKI_URL/team/hiring-scorecard/" target="_blank">Hiring Scorecard</a></li>
+          <li><a href="https://YOUR_WIKI_URL/team/delegation-checklist/" target="_blank">Delegation Checklist</a></li>
+          <li><a href="https://YOUR_WIKI_URL/team/va-task-protocol/" target="_blank">VA Task Protocol</a></li>
+        </ul>
+      </div>
+
+      <!-- FINANCE -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Finance</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/finance/monthly-pl/" target="_blank">Monthly P&L</a></li>
+          <li><a href="https://YOUR_WIKI_URL/finance/payroll/" target="_blank">Payroll</a></li>
+          <li><a href="https://YOUR_WIKI_URL/finance/invoicing/" target="_blank">Invoicing</a></li>
+          <li><a href="https://YOUR_WIKI_URL/finance/tax-prep/" target="_blank">Tax Prep</a></li>
+        </ul>
+      </div>
+
+      <!-- TOOLS & TECH -->
+      <div class="sop-cat">
+        <div class="sop-cat-title">Tools & Tech</div>
+        <ul>
+          <li><a href="https://YOUR_WIKI_URL/tools/website-build-sop/" target="_blank">Website Build SOP</a></li>
+          <li><a href="https://YOUR_WIKI_URL/tools/tech-stack/" target="_blank">Full Tech Stack</a></li>
+          <li><a href="https://YOUR_WIKI_URL/tools/cloudflare-deploy/" target="_blank">Cloudflare Deploy</a></li>
+          <li><a href="https://YOUR_WIKI_URL/tools/ghl-setup/" target="_blank">GHL Setup</a></li>
+          <li><a href="https://YOUR_WIKI_URL/tools/google-drive-map/" target="_blank">Google Drive Map</a></li>
+          <li><a href="https://YOUR_WIKI_URL/tools/social-media-setup/" target="_blank">📱 Social Media Setup</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION: CLIENT ACCOUNTS
+     Track your live clients here — one row per client.
+     Green = healthy, Yellow = needs attention, Red = at risk.
+     Move this section to a separate client-tracker.html as you grow.
+     ══════════════════════════════════════════════════════ -->
+<div class="divider"><div class="divider-label">Client Accounts</div></div>
+<div class="grid">
+
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Active Clients</span>
+      <span class="badge badge-green">[X] CLIENTS · $[X]K MRR</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <!-- STATUS: green=healthy, yellow=needs attention, red=at-risk -->
+        <!-- TIER: Starter / Growth / Dominate -->
+        <li><span class="label"><span class="status-dot dot-green"></span>[CLIENT NAME 1]</span><span class="value">Starter · Month [X] · 📈 Ranking</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>[CLIENT NAME 2]</span><span class="value">Growth · Month [X] · 📈 Leads up</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>[CLIENT NAME 3]</span><span class="value">Starter · Month [X] · ⚠️ Reviews stalled</span></li>
+        <li><span class="label"><span class="status-dot dot-blue"></span>[YOUR OWN BUSINESS]</span><span class="value">Case Study #1 · Day [X] · Documenting</span></li>
+        <!-- Add rows as you sign clients. Max [X] new/month = your scarcity limit. -->
+      </ul>
+    </div>
+    <div class="links">
+      <a href="https://YOUR_WIKI_URL/onboarding/day-one-kickoff/" class="link-btn" target="_blank">Kickoff SOP</a>
+      <a href="https://YOUR_WIKI_URL/measurement/weekly-client-report/" class="link-btn" target="_blank">Report Template</a>
+      <a href="https://YOUR_WIKI_URL/measurement/qbr-template/" class="link-btn" target="_blank">QBR Template</a>
+      <a href="https://app.gohighlevel.com" class="link-btn" target="_blank">GHL Pipeline</a>
+    </div>
+  </div>
+
+  <!-- Pipeline / Prospect Tracker -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Pipeline — Prospects</span>
+      <span class="badge badge-yellow">IN PROGRESS</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <!-- Track your outreach here. Update weekly. -->
+        <li><span class="label"><span class="status-dot dot-orange"></span>[PROSPECT 1]</span><span class="value">Loom sent · Follow up [DATE]</span></li>
+        <li><span class="label"><span class="status-dot dot-orange"></span>[PROSPECT 2]</span><span class="value">Call booked · [DATE]</span></li>
+        <li><span class="label"><span class="status-dot dot-yellow"></span>[PROSPECT 3]</span><span class="value">Proposal sent · Awaiting</span></li>
+        <li><span class="label"><span class="status-dot dot-blue"></span>Prospect list size</span><span class="value">[X] / 30 built</span></li>
+        <li><span class="label"><span class="status-dot dot-blue"></span>Looms sent this month</span><span class="value">[X] / 20 goal</span></li>
+        <li><span class="label"><span class="status-dot dot-blue"></span>Strategy calls booked</span><span class="value">[X] this month</span></li>
+      </ul>
+    </div>
+    <div class="links">
+      <a href="https://YOUR_WIKI_URL/agency/cold-outreach-looms/" class="link-btn" target="_blank">GBP Audit Loom SOP</a>
+      <a href="https://YOUR_WIKI_URL/sales/discovery-call/" class="link-btn" target="_blank">Discovery Call SOP</a>
+    </div>
+  </div>
+
+  <!-- Agency Revenue Tracker -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Revenue Tracking</span>
+      <span class="badge badge-blue">MRR FOCUS</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="label">Current MRR</span><span class="value">$[X]/mo</span></li>
+        <li><span class="label">Active clients</span><span class="value">[X]</span></li>
+        <li><span class="label">Avg revenue per client</span><span class="value">$[X]/mo</span></li>
+        <li><span class="label">Churn this quarter</span><span class="value">[X] client(s)</span></li>
+        <li><span class="label">Next milestone</span><span class="value">$[X]K MRR · [X] clients</span></li>
+        <li><span class="label"><span class="status-dot dot-green"></span>Trend</span><span class="value">📈 Growing</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     SECTION: TOOLS & SESSIONS
+     ══════════════════════════════════════════════════════ -->
+<div class="divider"><div class="divider-label">Tools & Claude Sessions</div></div>
+<div class="grid">
+
+  <!-- Quick Links to All Tools -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Tools & Platforms</span>
+    </div>
+    <div class="links">
+      <a href="https://app.clickup.com" class="link-btn" target="_blank">ClickUp</a>
+      <a href="https://app.gohighlevel.com" class="link-btn" target="_blank">GoHighLevel</a>
+      <a href="https://studio.youtube.com" class="link-btn" target="_blank">YouTube Studio</a>
+      <a href="https://semrush.com" class="link-btn" target="_blank">SEMrush</a>
+      <a href="https://YOUR_AGENCY_WEBSITE" class="link-btn" target="_blank">Agency Website</a>
+      <a href="https://www.canva.com" class="link-btn" target="_blank">Canva</a>
+      <a href="https://drive.google.com" class="link-btn" target="_blank">Google Drive</a>
+      <a href="https://mail.google.com" class="link-btn" target="_blank">Gmail</a>
+      <a href="https://dash.cloudflare.com" class="link-btn" target="_blank">Cloudflare</a>
+      <a href="https://github.com/[YOUR_GITHUB]/[YOUR_WIKI_REPO]" class="link-btn" target="_blank">GitHub Wiki Repo</a>
+    </div>
+  </div>
+
+  <!-- Claude Sessions by Department
+       Pro tip: Open Claude Code from the relevant folder for each department.
+       This keeps context focused and prevents token burn on unrelated work. -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">Claude Sessions by Department</span>
+      <span class="badge badge-green">ORGANIZED</span>
+    </div>
+    <div class="card-body">
+      <div class="dept">
+        <div class="dept-title">Master HQ (All Businesses)</div>
+        <div class="dept-items">
+          <code>~/Desktop/[AGENCY]-HQ/</code><br>
+          Open here for big-picture strategy and cross-business decisions.
+        </div>
+      </div>
+      <div class="dept">
+        <div class="dept-title">Content / YouTube SEO</div>
+        <div class="dept-items"><code>~/Desktop/[AGENCY]-HQ/youtube/leaf-strategy/</code></div>
+      </div>
+      <div class="dept">
+        <div class="dept-title">Agency Website / SEO</div>
+        <div class="dept-items"><code>~/Desktop/[AGENCY]-HQ/website/[agency]-astro/</code></div>
+      </div>
+      <div class="dept">
+        <div class="dept-title">GHL / CRM / Funnels</div>
+        <div class="dept-items"><code>~/Desktop/[AGENCY]-HQ/ghl/</code></div>
+      </div>
+      <div class="dept">
+        <div class="dept-title">SOP Wiki</div>
+        <div class="dept-items">
+          <code>~/Desktop/[AGENCY]-HQ/sop-wiki/</code><br>
+          Push to main → auto-deploys to Cloudflare Pages
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- YouTube / Content Channel Stats -->
+  <div class="card">
+    <div class="card-header">
+      <span class="card-title">YouTube Channel ([MONTH YEAR])</span>
+      <span class="badge badge-green">ACTIVE</span>
+    </div>
+    <div class="card-body">
+      <ul>
+        <li><span class="label">Total Videos</span><span class="value">[X]</span></li>
+        <li><span class="label">Subscribers</span><span class="value">[X]</span></li>
+        <li><span class="label">Total Views</span><span class="value">[X]</span></li>
+        <li><span class="label">Public</span><span class="value">[X]</span></li>
+        <li><span class="label">Unlisted</span><span class="value">[X]</span></li>
+        <li><span class="label">Private</span><span class="value">[X]</span></li>
+        <li><span class="label">Unedited Backlog</span><span class="value" style="color:#f87171;">[X]</span></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     FOOTER NOTES (visible at bottom, low-key)
+     ══════════════════════════════════════════════════════ -->
+<div style="padding:20px 24px;border-top:1px solid #1e293b;font-size:0.75rem;color:#334155;text-align:center;">
+  [YOUR AGENCY] · [YOUR NICHE] Marketing · Built with the 7-Figure Agency SOP Wiki template ·
+  <a href="https://YOUR_WIKI_URL" style="color:#475569;text-decoration:none;" target="_blank">YOUR_WIKI_URL</a> ·
+  Updated [DATE]
+</div>
+
+</body>
+</html>
