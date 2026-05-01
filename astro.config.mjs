@@ -94,6 +94,7 @@ export default defineConfig({
 						{ label: 'Operations — Crisis Communication Plan', slug: 'operations/crisis-comms' },
 						{ label: 'Operations — White-label Fulfillment Partners', slug: 'operations/white-label-fulfillment' },
 						{ label: 'Leadership — Founder Role Definition', slug: 'operations/owner-role' },
+							{ label: 'Process — Writing a New SOP', slug: 'operations/writing-an-sop' },
 					],
 				},
 				{
