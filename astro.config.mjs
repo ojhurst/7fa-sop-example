@@ -95,6 +95,7 @@ export default defineConfig({
 						{ label: 'Operations — White-label Fulfillment Partners', slug: 'operations/white-label-fulfillment' },
 						{ label: 'Leadership — Founder Role Definition', slug: 'operations/owner-role' },
 							{ label: 'Process — Writing a New SOP', slug: 'operations/writing-an-sop' },
+							{ label: 'Process — Adding Users to Your Wiki Repo', slug: 'operations/add-github-users' },
 					],
 				},
 				{
