@@ -1,9 +1,13 @@
 # 7fa-sop-example
 
+> **Sync:** studio, mbp
+>
 > Inherits from the global CLAUDE.md (`~/.claude/CLAUDE.md`). This file covers repo-specific conventions only.
 
 ## What This Is
-A starter wiki for a seven-figure agency — forty SOP stubs across paid acquisition, organic, sales, onboarding, operations, measurement, and creative. Intended to be cloned and filled in.
+A starter wiki for a seven-figure agency — 58 SOP stubs across paid acquisition, organic, sales, onboarding, operations, measurement, and creative. Intended to be cloned and filled in.
+
+Live preview at [7fa-sop-example.themarketingshow.com](https://7fa-sop-example.themarketingshow.com/) so visitors can browse the stubs before forking.
 
 ## Tech Stack
 Astro 6 + Starlight 0.38. Markdown content in `src/content/docs/`, sidebar hand-registered in `astro.config.mjs`, deploys as a static site.
@@ -36,6 +40,8 @@ The sidebar lives in `astro.config.mjs`. When adding a new stub:
 3. Restart `npm run dev` if the sidebar does not pick it up.
 
 ## Deploy
-- This is a starter repo, deploy target is agency-specific.
-- Recommended: Cloudflare Pages via GitHub Actions (see `~/apps/cc/templates/cloudflare-pages-deploy.yml`).
-- Never leave Cloudflare Pages on direct-upload — use the GH Actions workflow.
+- Cloudflare Pages project `7fa-sop-example`, deploys via `.github/workflows/deploy.yml` on every push to `main`.
+- Default URL: `7fa-sop-example.pages.dev`. Custom domain: `7fa-sop-example.themarketingshow.com` (CNAME in `themarketingshow.com` zone, proxied).
+- Repo secrets `CLOUDFLARE_API_TOKEN` (= `CF_PAGES_DEPLOY_TOKEN`) and `CLOUDFLARE_ACCOUNT_ID` are set on the GitHub repo.
+- Never leave the CF Pages project on direct-upload — the GH Actions workflow is the only deploy path.
+- For forks: replace the project name in `deploy.yml`, set the same two secrets, point your own subdomain at it.
