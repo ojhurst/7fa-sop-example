@@ -1,6 +1,6 @@
 # 7fa-sop-example
 
-A starter wiki for a seven-figure agency. 58 SOP stubs covering paid acquisition, organic, sales, onboarding, operations, measurement, and creative. Built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build). Fork it, rename it, fill the stubs in with how your agency actually works.
+A starter wiki for a seven-figure agency. 80 SOP stubs covering paid acquisition, organic, sales, onboarding, operations, measurement, creative, retention, and AI automation. Built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build). Fork it, rename it, fill the stubs in with how your agency actually works.
 
 ## Get started
 
@@ -22,9 +22,9 @@ npm run preview     # preview the build locally
 
 Deploy the `dist/` folder to Cloudflare Pages, Vercel, or Netlify. For Cloudflare Pages with GitHub Actions, see `.github/workflows/deploy.yml` (add your secrets).
 
-## The 58 stubs
+## The 80 stubs
 
-Grouped in six sections: Paid Acquisition (13), Organic Acquisition (9), Sales and Onboarding (10), Operations (10), Measurement (7), Creative and Strategy (9). Each stub has the same shape: What, Who owns it, Steps, Definition of done. Replace every TODO with how your agency does it.
+Grouped in eight sections: Paid Acquisition (14), Organic Acquisition (11), Sales and Onboarding (13), Operations (15), Measurement (8), Creative and Strategy (12), Client Retention (4), AI and Automation (3). Each stub has the same shape: What, Who owns it, Steps, Definition of done. Replace every TODO with how your agency does it.
 
 ## The rule
 
