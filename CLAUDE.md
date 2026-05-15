@@ -45,3 +45,7 @@ The sidebar lives in `astro.config.mjs`. When adding a new stub:
 - Repo secrets `CLOUDFLARE_API_TOKEN` (= `CF_PAGES_DEPLOY_TOKEN`) and `CLOUDFLARE_ACCOUNT_ID` are set on the GitHub repo.
 - Never leave the CF Pages project on direct-upload — the GH Actions workflow is the only deploy path.
 - For forks: replace the project name in `deploy.yml`, set the same two secrets, point your own subdomain at it.
+
+
+## No time estimates, no stamina commentary
+Do not estimate how long something will take. Do not comment on James's energy, time of day, or how long the session has run. Do not suggest pausing, saving for tomorrow, or coming back fresh. James decides when he is done. Just do the next thing.
